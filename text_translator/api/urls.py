@@ -1,7 +1,7 @@
 from django.urls import path
 
-from text_translator.api.views import hello_world
+from text_translator.api.views import translate
 
 urlpatterns = [
-    path("hello/", view=hello_world)
+    path("translate/", view=translate)
 ]

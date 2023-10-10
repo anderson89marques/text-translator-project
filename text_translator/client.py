@@ -45,10 +45,12 @@ class GoogleTranslateClient:
             "",
             json=payload
         )
-        return response.json()
-        
+        response.raise_for_status()
+        response_json = response.json()
+        return response_json["data"]
 
     def languages(self):
         response = self.session.get("languages")
-        data = response.json()
-        return data
+        response.raise_for_status()
+        response_json = response.json()
+        return response_json["data"]

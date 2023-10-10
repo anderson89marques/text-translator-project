@@ -10,6 +10,7 @@ python = "^3.11"
 Django = "^4.2.6"
 djangorestframework = "^3.14.0"
 requests = "^2.31.0"
+drf-spectacular = "^0.26.5"
 
 [tool.poetry.group.dev.dependencies]
 isort = "^5.12.0"
