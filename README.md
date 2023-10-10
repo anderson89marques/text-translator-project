@@ -17,10 +17,10 @@ A simple text translator API.
 
 ### Instalar dependências.
 
-- via poetry (e preciso instalar o poetry primeiro)
+- via poetry (é preciso instalar o poetry)
 
 ```console
-$ poetry instrall
+$ poetry install
 ```
 
 - via pip + requirements.txt
