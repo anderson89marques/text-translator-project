@@ -1,4 +1,5 @@
 
+import requests
 from drf_spectacular.utils import extend_schema
 from rest_framework import status
 from rest_framework.decorators import api_view
@@ -17,10 +18,13 @@ from text_translator.service import TranslatorService
 def translate(request):
     serializer = TranslateSerializer(data=request.data)
     if serializer.is_valid():
-        service = TranslatorService()
-        data = service.translate(serializer.data)
-        response_serializer = TranslateResponseSerializer(data)
-        return Response(response_serializer.data, status=status.HTTP_200_OK)
+        try:
+            service = TranslatorService()
+            data = service.translate(serializer.data)
+            response_serializer = TranslateResponseSerializer(data)
+            return Response(response_serializer.data, status=status.HTTP_200_OK)
+        except requests.exceptions.HTTPError as e:
+            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -32,8 +36,11 @@ def translate(request):
 def translate_cache(request):
     serializer = TranslateSerializer(data=request.data)
     if serializer.is_valid():
-        service = TranslatorService()
-        data = service.translate(serializer.data)
-        response_serializer = TranslateResponseSerializer(data)
-        return Response(response_serializer.data, status=status.HTTP_200_OK)
+        try:
+            service = TranslatorService()
+            data = service.translate(serializer.data)
+            response_serializer = TranslateResponseSerializer(data)
+            return Response(response_serializer.data, status=status.HTTP_200_OK)
+        except requests.exceptions.HTTPError as e:
+            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
