@@ -6,5 +6,6 @@ class TranslateSerializer(serializers.Serializer):
     language_to = serializers.CharField(required=True)
     text = serializers.CharField(required=True)
 
+
 class TranslateResponseSerializer(TranslateSerializer):
     text_translated = serializers.CharField(required=True)

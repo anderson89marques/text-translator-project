@@ -3,7 +3,9 @@ from urllib.parse import urljoin
 
 import requests
 
-BASE_URL = os.environ.get("EXTERNAL_API", default="https://translation.googleapis.com/language/translate/v2/")
+BASE_URL = os.environ.get(
+    "EXTERNAL_API", default="https://translation.googleapis.com/language/translate/v2/"
+)
 
 
 class GoogleTranslateSession(requests.Session):
@@ -11,11 +13,10 @@ class GoogleTranslateSession(requests.Session):
         super().__init__()
         self.base_url = BASE_URL
         self.token = token
-        self.headers.update({
-            "Content-Type": "application/json",
-            "X-goog-api-key": f"{self.token}"
-        })
-    
+        self.headers.update(
+            {"Content-Type": "application/json", "X-goog-api-key": f"{self.token}"}
+        )
+
     def request(self, method, url, *args, **kwargs):
         path = urljoin(self.base_url, url)
         return super().request(method, path, *args, **kwargs)
@@ -29,11 +30,11 @@ class GoogleTranslateClient:
     def from_credential(cls, token):
         session = GoogleTranslateSession(token)
         return cls(session)
-    
+
     def translate(self, payload: dict):
         """
-        payload = 
-        { 
+        payload =
+        {
             "q":"loren ipsum...."
             "source":"en",
             "target":"pt",
@@ -41,10 +42,7 @@ class GoogleTranslateClient:
             "model": "base"
         }
         """
-        response = self.session.post(
-            "",
-            json=payload
-        )
+        response = self.session.post("", json=payload)
         response.raise_for_status()
         response_json = response.json()
         return response_json["data"]

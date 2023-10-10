@@ -3,14 +3,16 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 
-from text_translator.api.serializers import (TranslateResponseSerializer,
-                                             TranslateSerializer)
+from text_translator.api.serializers import (
+    TranslateResponseSerializer,
+    TranslateSerializer,
+)
 from text_translator.service import TranslatorService
 
 
 @extend_schema(
-        request=TranslateSerializer,
-        responses={status.HTTP_200_OK: TranslateResponseSerializer}
+    request=TranslateSerializer,
+    responses={status.HTTP_200_OK: TranslateResponseSerializer},
 )
 @api_view(["POST"])
 def translate(request):

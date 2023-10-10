@@ -8,14 +8,14 @@ TOKEN = config("TOKEN", default="fake_token")
 class TranslatorService:
     def __init__(self) -> None:
         self.client = GoogleTranslateClient.from_credential(TOKEN)
-    
+
     def translate(self, payload: dict):
-        google_payload = { 
+        google_payload = {
             "q": payload["text"],
             "source": payload["language_from"],
             "target": payload["language_to"],
             "format": "text",
-            "model": "base"
+            "model": "base",
         }
         data = self.client.translate(google_payload)
         if data.get("translations"):
