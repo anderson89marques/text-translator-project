@@ -9,4 +9,5 @@ fmt:
 	black .
 
 api:
+	docker-compose up --build -d redis 
 	python manage.py runserver
