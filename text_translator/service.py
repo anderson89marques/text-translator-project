@@ -1,6 +1,8 @@
+from decouple import config
+
 from text_translator.client import GoogleTranslateClient
 
-TOKEN = "AIzaSyCdTzxOCIzK5U6OVp3WZzGAljSCx0cbr28"
+TOKEN = config("TOKEN", default="fake_token")
 
 
 class TranslatorService:
